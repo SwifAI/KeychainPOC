@@ -43,9 +43,9 @@ let addQuery: [String: Any] = [
 SecItemAdd(addQuery as CFDictionary, nil)
 ```
 
-### Bug 3: Missing entitlements on Simulator
+### Note: Entitlements (Simulator only)
 
-Without a Keychain entitlements file, the iOS Simulator can silently fail keychain operations with error `-34018` (`errSecMissingEntitlement`). Adding the Keychain Sharing capability generates the required entitlements file.
+This POC includes a `KeychainPOC.entitlements` file to avoid simulator error `-34018` (`errSecMissingEntitlement`). Your actual project should already have its own entitlements configured — **the only fixes needed in production are Bug 1 and Bug 2 above.**
 
 ## Project Structure
 
@@ -54,7 +54,7 @@ KeychainPOC/
 ├── KeychainPOCApp.swift        # App entry point
 ├── ContentView.swift           # Test UI with Generate / Check / Encrypt / Delete buttons
 ├── KeychainManager.swift       # Corrected Keychain implementation
-├── KeychainPOC.entitlements    # Keychain access group entitlement
+├── KeychainPOC.entitlements    # For simulator only — not needed in production
 └── Info.plist
 ```
 
